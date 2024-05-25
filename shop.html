@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ichie.</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="logo">
+        <h1>ichie.</h1>
+      </div>
+      <nav>
+        <a href="index.html">home</a>
+        <a href="aboutus.html">about us</a>
+        <a href="shop.html">shop</a>
+        <a href="contactus.html">contact us</a>
+        <a> │ </a>
+        <button class="cart-button">cart <span class="cart-count">0</span></button>
+      </nav>
+    </div>
+  </header>
+  <section>
+    <div id="cart">
+      <div class="product-container">
+      </div>
+    </div>
+    <div class="product-container">
+      <div class="product">
+        <img src="https://i.pinimg.com/564x/78/6d/ee/786dee284c3cb1272d26f5b8b9753076.jpg" alt="Cookie">
+        <h3>WHITE BEACH TOP</h3>
+        <p>₱340.00</p>
+        <button class="add-to-cart-button">Add to Bag</button>
+      </div>
+      <div class="product">
+        <img src="https://i.pinimg.com/564x/a1/37/c1/a137c116be960c11b114438612cc509a.jpg" alt="Croissant">
+        <h3>LEMON EMBROIDERED TOP</h3>
+        <p>Price: ₱499.00</p>
+        <button class="add-to-cart-button">Add to Bag</button>
+      </div>
+<div class="product">
+        <img src="https://i.pinimg.com/originals/36/53/c9/3653c94b1940d2b9d49b7dd9a76def23.jpg" alt="Cupcake">
+        <h3>PEARL WHITE CORSET TOP</h3>
+        <p>₱590.00</p>
+        <button class="add-to-cart-button">Add to Bag</button>
+      </div>
+      <div class="product">
+        <img src="https://i.pinimg.com/originals/ca/67/5d/ca675dc85fce6f54b4c0a8bd669872ad.jpg" alt="Cookie">
+        <h3>WHITE TUBE TIE</h3>
+        <p>₱450.00</p>
+        <button class="add-to-cart-button">Add to Bag</button>
+      </div>
+      <div class="product">
+        <img src="https://i.pinimg.com/564x/75/ca/58/75ca5842d917031b463c14f29f337f3d.jpg" alt="Cookie">
+        <h3>WHITE PEPLUM TOP</h3>
+        <p>₱540.00</p>
+        <button class="add-to-cart-button">Add to Bag</button>
+      </div>
+      <div class="product">
+        <img src="https://i.pinimg.com/originals/81/b7/68/81b76810d8bb7bba51517235ad6b7dfb.jpg" alt="Cookie">
+        <h3>WHITE LACE TOP</h3>
+        <p>₱499.00</p>
+        <button class="add-to-cart-button">Add to Bag</button>
+      </div>
+    </div>
+  </section>
+  <footer class="footer">
+    <p>&copy; 2024 ichie.</p>
+  </footer>
+ <script>
+    document.addEventListener('DOMContentLoaded', () => {
+  let cart = [];
+  const cartButton = document.querySelector('.cart-button');
+  const cartCount = document.querySelector('.cart-count');
+  const cartItemsContainer = document.querySelector('.cart-items');
+  const addToCartButtons = document.querySelectorAll('.add-to-cart-button');
+  const cartSection = document.getElementById('cart');
+
+  addToCartButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const productName = button.getAttribute('data-name');
+      const productPrice = button.getAttribute('data-price');
+
+      addItemToCart(productName, productPrice);
+      updateCartCount();
+    });
+  });
+
+  cartButton.addEventListener('click', () => {
+    toggleCartDisplay();
+    showCartItems();
+  });
+
+  function addItemToCart(name, price) {
+    const item = cart.find(i => i.name === name);
+    if (item) {
+      item.quantity++;
+    } else {
+      cart.push({ name, price, quantity: 1 });
+    }
+  }
+
+  function updateCartCount() {
+    cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+  }
+
+  function toggleCartDisplay() {
+    cartSection.style.display = cartSection.style.display === 'none' ? 'block' : 'none';
+  }
+
+  function showCartItems() {
+    cartItemsContainer.innerHTML = '';
+    if (cart.length === 0) {
+      cartItemsContainer.innerHTML = '<p>Your cart is empty.</p>';
+    } else {
+      cart.forEach(item => {
+        const cartItem = document.createElement('div');
+        cartItem.className = 'cart-item';
+        cartItem.innerHTML = 
+          <p>${item.name} - ₱${item.price} x ${item.quantity}</p>
+        ;
+        cartItemsContainer.appendChild(cartItem);
+      });
+    }
+  }
+});
+  </script>
+</body>
+</html>
